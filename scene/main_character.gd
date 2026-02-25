@@ -17,6 +17,9 @@ var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
 var was_on_floor := false
 
+func _ready() -> void:
+	set_meta("spawn_position", global_position)
+
 func is_invincible() -> bool:
 	return invincible_timer > 0.0
 
