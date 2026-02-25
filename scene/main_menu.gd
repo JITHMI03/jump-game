@@ -4,7 +4,10 @@ func _ready() -> void:
 	var lbl = get_node_or_null("bestscore_label")
 	if lbl:
 		var best = GameManager.best_score
-		lbl.text = "Best Score: " + str(best) if best > 0 else "Best Score: --"
+		if best > 0:
+			lbl.text = "Best Score: " + str(best)
+		else:
+			lbl.text = "Best Score: --"
 
 func _on_level_1_pressed() -> void:
 	Transition.fade_to_scene("res://scene/level1.tscn")

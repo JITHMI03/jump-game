@@ -54,8 +54,6 @@ func _apply_shield(body: CharacterBody2D) -> void:
 	body.invincible_timer = SHIELD_DURATION
 
 func _apply_speed(body: CharacterBody2D) -> void:
-	# Temporarily boost speed via a timed override
-	var orig_speed = body.get("speed_override") if body.get("speed_override") else 0.0
 	_boost_speed(body)
 
 func _boost_speed(body: CharacterBody2D) -> void:
