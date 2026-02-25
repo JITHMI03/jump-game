@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dwyray4owcw1v" path="res://scene/level2.tscn" id="7_ebr37"]
 [ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="8_pause"]
 [ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="9_touch"]
+[ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="10_fall"]
+[ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="11_hearts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_xy4tn")
@@ -190,11 +192,14 @@ texture = ExtResource("3_xy4tn")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_7mycd")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fall"]
+
 [node name="Node" type="Node" unique_id=113244691]
 
-[node name="gamemanager" type="Node" parent="." unique_id=1359945493]
+[node name="gamemanager" type="Node" parent="." unique_id=1359945493 node_paths=PackedStringArray("hearts")]
 unique_name_in_owner = true
 script = ExtResource("1_crycw")
+hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
 
 [node name="scene object" type="Node" parent="." unique_id=177684991]
 
@@ -350,6 +355,13 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 2048, 2048)
 
+[node name="fall_area" type="Area2D" parent="scene object" unique_id=447394905]
+position = Vector2(1500, 900)
+script = ExtResource("10_fall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene object/fall_area" unique_id=716088449]
+shape = SubResource("WorldBoundaryShape2D_fall")
+
 [node name="ui" type="CanvasLayer" parent="." unique_id=1369276652]
 
 [node name="Panel" type="Panel" parent="ui" unique_id=577006241]
@@ -424,7 +436,47 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 
+[node name="hearts" type="Panel" parent="ui" unique_id=1470605020]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -194.0
+offset_top = 15.0
+offset_bottom = 62.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/hearts" unique_id=2143642092]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 194.0
+offset_bottom = 22.5
+grow_vertical = 2
+alignment = 1
+
+[node name="heart" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=1660133653]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hearts")
+expand_mode = 2
+
+[node name="heart2" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=365267650]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hearts")
+expand_mode = 2
+
+[node name="heart3" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=768596257]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hearts")
+expand_mode = 2
+
 [node name="touch_controls" parent="ui" instance=ExtResource("9_touch")]
 
+[connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/menu" to="ui/pause" method="_on_menu_pressed"]
