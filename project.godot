@@ -13,7 +13,7 @@ config_version=5
 config/name="tutorial"
 run/main_scene="uid://bnlvpkbhvfj2b"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://yoipvm055731"
+config/icon="uid://dgh2sl8pogh26"
 
 [display]
 
