@@ -1,68 +1,52 @@
 [gd_scene format=3 uid="uid://touch_controls_scene"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
-size = Vector2(130, 130)
+[sub_resource type="CircleShape2D" id="CircleShape2D_move"]
+radius = 55.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_right"]
-size = Vector2(130, 130)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jump"]
+radius = 55.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jump"]
-size = Vector2(130, 130)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pause"]
+radius = 35.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pause"]
-size = Vector2(80, 80)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_left"]
-bg_color = Color(0.98, 0.78, 0.08, 0.9)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 8
-border_color = Color(0.28, 0.14, 0.02, 1.0)
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_right"]
-bg_color = Color(0.98, 0.78, 0.08, 0.9)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 8
-border_color = Color(0.28, 0.14, 0.02, 1.0)
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-anti_aliasing = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_move"]
+bg_color = Color(0.08, 0.12, 0.08, 0.82)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.65, 0.45, 0.9)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jump"]
-bg_color = Color(0.95, 0.28, 0.28, 0.9)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 8
-border_color = Color(0.42, 0.06, 0.06, 1.0)
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-anti_aliasing = false
+bg_color = Color(0.08, 0.12, 0.08, 0.82)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.65, 0.45, 0.9)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause"]
-bg_color = Color(0.6, 0.42, 0.82, 0.9)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 6
-border_color = Color(0.25, 0.1, 0.42, 1.0)
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-anti_aliasing = false
+bg_color = Color(0.08, 0.12, 0.08, 0.82)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.65, 0.45, 0.9)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 12
 
 [node name="touch_controls" type="Control"]
 process_mode = 3
@@ -83,8 +67,8 @@ anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -150.0
-offset_right = 150.0
+offset_top = -140.0
+offset_right = 140.0
 offset_bottom = -20.0
 grow_horizontal = 1
 grow_vertical = 0
@@ -97,14 +81,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_left")
+theme_override_styles/panel = SubResource("StyleBoxFlat_move")
 mouse_filter = 2
 
 [node name="btn_left" type="TouchScreenButton" parent="btn_left_anchor"]
-position = Vector2(65, 65)
+position = Vector2(60, 60)
 modulate = Color(1, 1, 1, 0)
 action = "left"
-shape = SubResource("RectangleShape2D_left")
+shape = SubResource("CircleShape2D_move")
 passby_press = true
 visibility_mode = 1
 
@@ -115,12 +99,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 58
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.28, 0.14, 0.02, 1.0)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 4
-text = "◀"
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0.88, 0.95, 0.82, 1.0)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.6)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "←"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -132,9 +116,9 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 170.0
-offset_top = -150.0
-offset_right = 300.0
+offset_left = 160.0
+offset_top = -140.0
+offset_right = 280.0
 offset_bottom = -20.0
 grow_horizontal = 1
 grow_vertical = 0
@@ -147,14 +131,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_right")
+theme_override_styles/panel = SubResource("StyleBoxFlat_move")
 mouse_filter = 2
 
 [node name="btn_right" type="TouchScreenButton" parent="btn_right_anchor"]
-position = Vector2(65, 65)
+position = Vector2(60, 60)
 modulate = Color(1, 1, 1, 0)
 action = "right"
-shape = SubResource("RectangleShape2D_right")
+shape = SubResource("CircleShape2D_move")
 passby_press = true
 visibility_mode = 1
 
@@ -165,12 +149,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 58
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.28, 0.14, 0.02, 1.0)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 4
-text = "▶"
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0.88, 0.95, 0.82, 1.0)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.6)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "→"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -182,8 +166,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -150.0
+offset_left = -140.0
+offset_top = -140.0
 offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 0
@@ -201,10 +185,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jump")
 mouse_filter = 2
 
 [node name="btn_jump" type="TouchScreenButton" parent="btn_jump_anchor"]
-position = Vector2(65, 65)
+position = Vector2(60, 60)
 modulate = Color(1, 1, 1, 0)
 action = "jump"
-shape = SubResource("RectangleShape2D_jump")
+shape = SubResource("CircleShape2D_jump")
 passby_press = false
 visibility_mode = 1
 
@@ -215,12 +199,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 58
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.42, 0.06, 0.06, 1.0)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 4
-text = "▲"
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0.88, 0.95, 0.82, 1.0)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.6)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "↑"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -232,10 +216,10 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -90.0
+offset_left = -86.0
 offset_top = 70.0
-offset_right = -10.0
-offset_bottom = 150.0
+offset_right = -16.0
+offset_bottom = 140.0
 grow_horizontal = 0
 grow_vertical = 1
 mouse_filter = 2
@@ -251,10 +235,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_pause")
 mouse_filter = 2
 
 [node name="btn_pause" type="TouchScreenButton" parent="btn_pause_anchor"]
-position = Vector2(40, 40)
+position = Vector2(35, 35)
 modulate = Color(1, 1, 1, 0)
 action = "pause"
-shape = SubResource("RectangleShape2D_pause")
+shape = SubResource("CircleShape2D_pause")
 passby_press = false
 visibility_mode = 1
 
@@ -265,11 +249,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.25, 0.1, 0.42, 1.0)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.88, 0.95, 0.82, 1.0)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.6)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 text = "⏸"
 horizontal_alignment = 1
 vertical_alignment = 1
