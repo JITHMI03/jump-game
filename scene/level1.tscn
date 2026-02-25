@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="9_touch"]
 [ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="10_fall"]
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="11_hearts"]
+[ext_resource type="PackedScene" uid="uid://ctvyjakwuokpf" path="res://scene/enemy.tscn" id="12_enemy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_xy4tn")
@@ -338,6 +339,17 @@ position = Vector2(1988, 627)
 [node name="collectable48" parent="scene object/collectables group" unique_id=974563848 instance=ExtResource("5_5j5gb")]
 position = Vector2(1917, 628)
 
+[node name="enemies" type="Node" parent="scene object" unique_id=553311001]
+
+[node name="enemy" parent="scene object/enemies" unique_id=553311002 instance=ExtResource("12_enemy")]
+position = Vector2(550, 460)
+
+[node name="enemy2" parent="scene object/enemies" unique_id=553311003 instance=ExtResource("12_enemy")]
+position = Vector2(920, 460)
+
+[node name="enemy3" parent="scene object/enemies" unique_id=553311004 instance=ExtResource("12_enemy")]
+position = Vector2(1380, 460)
+
 [node name="end" parent="scene object" unique_id=1475683813 instance=ExtResource("6_mx85b")]
 position = Vector2(3010, 349)
 target_level = ExtResource("7_ebr37")
@@ -383,6 +395,7 @@ text = "Collected : 0"
 horizontal_alignment = 1
 
 [node name="pause" type="Node" parent="ui"]
+process_mode = 3
 script = ExtResource("8_pause")
 
 [node name="PausePanel" type="Panel" parent="ui/pause"]

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://touch_controls_scene"]
 
+[ext_resource type="Script" uid="uid://bdaceqptk7vo4" path="res://scene/touch_controls.gd" id="1_tc_script"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_move"]
 radius = 55.0
 
@@ -60,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = "res://scene/touch_controls.gd"
+script = ExtResource("1_tc_script")
 
 [node name="btn_left_anchor" type="Control" parent="."]
 layout_mode = 1

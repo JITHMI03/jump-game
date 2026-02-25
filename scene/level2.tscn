@@ -384,6 +384,7 @@ text = "Collected : 0"
 horizontal_alignment = 1
 
 [node name="pause" type="Node" parent="ui" unique_id=671020023]
+process_mode = 3
 script = ExtResource("11_vwck2")
 
 [node name="PausePanel" type="Panel" parent="ui/pause" unique_id=607411258]

@@ -2,9 +2,21 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -900.0
+const INVINCIBLE_DURATION = 1.5
+
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 
 var jump_count = 0
+var invincible_timer := 0.0
+
+func is_invincible() -> bool:
+	return invincible_timer > 0.0
+
+func take_hit():
+	if is_invincible():
+		return false
+	invincible_timer = INVINCIBLE_DURATION
+	return true
 
 func jump():
 	velocity.y = JUMP_VELOCITY
@@ -14,6 +26,14 @@ func jump_side(x):
 	velocity.x = x
 
 func _physics_process(delta: float) -> void:
+	# Invincibility countdown + flicker effect
+	if invincible_timer > 0.0:
+		invincible_timer -= delta
+		sprite_2d.modulate.a = 0.3 if fmod(invincible_timer, 0.2) > 0.1 else 1.0
+		if invincible_timer <= 0.0:
+			invincible_timer = 0.0
+			sprite_2d.modulate.a = 1.0
+
 	# Add the gravity.
 	if is_on_floor():
 		jump_count = 0
