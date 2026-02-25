@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bvjhvck0vyjwa" path="res://scene/collectable.tscn" id="5_5j5gb"]
 [ext_resource type="PackedScene" uid="uid://ck6eut5wtdkk7" path="res://scene/end.tscn" id="6_mx85b"]
 [ext_resource type="PackedScene" uid="uid://dwyray4owcw1v" path="res://scene/level2.tscn" id="7_ebr37"]
+[ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="8_pause"]
+[ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="9_touch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_xy4tn")
@@ -367,3 +369,62 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "Collected : 0"
 horizontal_alignment = 1
+
+[node name="pause" type="Node" parent="ui"]
+script = ExtResource("8_pause")
+
+[node name="PausePanel" type="Panel" parent="ui/pause"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ui/pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.5
+offset_top = -63.0
+offset_right = 165.5
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/pause/PausePanel/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -5.0
+offset_right = 173.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="resume" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Resume"
+
+[node name="menu" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="touch_controls" parent="ui" instance=ExtResource("9_touch")]
+
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/menu" to="ui/pause" method="_on_menu_pressed"]

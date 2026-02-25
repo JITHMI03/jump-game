@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="9_yilmc"]
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="10_epjhv"]
 [ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="11_vwck2"]
+[ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="12_touch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_rmy57")
@@ -474,6 +475,8 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_epjhv")
 expand_mode = 2
+
+[node name="touch_controls" parent="ui" instance=ExtResource("12_touch")]
 
 [connection signal="body_entered" from="scene object/Area2D" to="scene object/Area2D" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]

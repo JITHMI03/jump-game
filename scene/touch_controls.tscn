@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://touch_controls_scene"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jump"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pause"]
+size = Vector2(80, 80)
+
+[node name="touch_controls" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = "res://scene/touch_controls.gd"
+
+[node name="btn_left_anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = -20.0
+grow_horizontal = 1
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="btn_left" type="TouchScreenButton" parent="btn_left_anchor"]
+position = Vector2(0, 0)
+modulate = Color(0.2, 0.2, 0.2, 0.6)
+action = "left"
+shape = SubResource("RectangleShape2D_left")
+passby_press = true
+visibility_mode = 1
+
+[node name="lbl_left" type="Label" parent="btn_left_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 52
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="btn_right_anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 170.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_horizontal = 1
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="btn_right" type="TouchScreenButton" parent="btn_right_anchor"]
+position = Vector2(0, 0)
+modulate = Color(0.2, 0.2, 0.2, 0.6)
+action = "right"
+shape = SubResource("RectangleShape2D_right")
+passby_press = true
+visibility_mode = 1
+
+[node name="lbl_right" type="Label" parent="btn_right_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 52
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="btn_jump_anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -150.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="btn_jump" type="TouchScreenButton" parent="btn_jump_anchor"]
+position = Vector2(0, 0)
+modulate = Color(0.2, 0.2, 0.2, 0.6)
+action = "jump"
+shape = SubResource("RectangleShape2D_jump")
+passby_press = false
+visibility_mode = 1
+
+[node name="lbl_jump" type="Label" parent="btn_jump_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 52
+text = "^"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="btn_pause_anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -90.0
+offset_top = 70.0
+offset_right = -10.0
+offset_bottom = 150.0
+grow_horizontal = 0
+grow_vertical = 1
+mouse_filter = 2
+
+[node name="btn_pause" type="TouchScreenButton" parent="btn_pause_anchor"]
+position = Vector2(0, 0)
+modulate = Color(0.2, 0.2, 0.2, 0.6)
+action = "pause"
+shape = SubResource("RectangleShape2D_pause")
+passby_press = false
+visibility_mode = 1
+
+[node name="lbl_pause" type="Label" parent="btn_pause_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "||"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
