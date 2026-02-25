@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="10_epjhv"]
 [ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="11_vwck2"]
 [ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="12_touch"]
+[ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="13_gameover"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_rmy57")
@@ -231,6 +232,7 @@ sources/1 = SubResource("TileSetAtlasSource_7mycd")
 unique_name_in_owner = true
 script = ExtResource("1_21xmu")
 hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
+game_over_node = NodePath("../ui/game_over")
 
 [node name="scene object" type="Node" parent="." unique_id=177684991]
 
@@ -256,6 +258,10 @@ position = Vector2(20, 285)
 
 [node name="Camera2D" type="Camera2D" parent="scene object/CharacterBody2D" unique_id=2115961280]
 position = Vector2(36, 162)
+limit_left = 0
+limit_top = -400
+limit_right = 3200
+limit_bottom = 900
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
@@ -478,6 +484,8 @@ texture = ExtResource("10_epjhv")
 expand_mode = 2
 
 [node name="touch_controls" parent="ui" instance=ExtResource("12_touch")]
+
+[node name="game_over" parent="ui" instance=ExtResource("13_gameover")]
 
 [connection signal="body_entered" from="scene object/Area2D" to="scene object/Area2D" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
