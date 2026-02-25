@@ -11,7 +11,7 @@ func show_complete(next_level: PackedScene) -> void:
 	var best = GameManager.best_score
 	if pts > best:
 		GameManager.best_score = pts
-		GameManager._save_best_score()
+		GameManager.save_best_score()
 		best = pts
 	score_label.text = "Score: " + str(pts) + ("  |  Best: " + str(best) if best > 0 else "")
 	# Update next button text

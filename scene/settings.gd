@@ -73,6 +73,12 @@ func _load_settings() -> void:
 		master_slider.value = float(data["master"])
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(float(data["master"])))
 	if data.has("sfx"):
-		sfx_slider.value = float(data["sfx"])
+		var sfx_val = float(data["sfx"])
+		sfx_slider.value = sfx_val
+		var bus_idx = AudioServer.get_bus_index("SFX")
+		if bus_idx >= 0:
+			AudioServer.set_bus_volume_db(bus_idx, linear_to_db(sfx_val))
 	if data.has("touch"):
-		touch_toggle.button_pressed = bool(data["touch"])
+		var touch_enabled = bool(data["touch"])
+		touch_toggle.button_pressed = touch_enabled
+		_apply_touch_visibility(touch_enabled)

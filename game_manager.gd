@@ -56,6 +56,9 @@ func _check_best_score() -> void:
 		best_score = points
 		_save_best_score()
 
+func save_best_score() -> void:
+	_check_best_score()
+
 func _save_best_score() -> void:
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:

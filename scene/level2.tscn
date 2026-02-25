@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="13_gameover"]
 [ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="14_lc"]
 [ext_resource type="Script" path="res://scene/music.gd" id="15_music"]
+[ext_resource type="PackedScene" uid="uid://enemy_fly_scene" path="res://scene/enemy_fly.tscn" id="16_fly"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_rmy57")
@@ -352,6 +353,15 @@ position = Vector2(1871, 572)
 
 [node name="enemy4" parent="scene object/enemy" unique_id=177286127 instance=ExtResource("8_kj7ci")]
 position = Vector2(2372, 479)
+[node name="fly_enemy1" parent="scene object/enemy" instance=ExtResource("16_fly")]
+position = Vector2(780, 300)
+
+[node name="fly_enemy2" parent="scene object/enemy" instance=ExtResource("16_fly")]
+position = Vector2(1400, 250)
+
+[node name="fly_enemy3" parent="scene object/enemy" instance=ExtResource("16_fly")]
+position = Vector2(2100, 200)
+
 
 [node name="Area2D" type="Area2D" parent="scene object" unique_id=447394905]
 position = Vector2(972, 722)

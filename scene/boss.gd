@@ -161,7 +161,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
 	var y_delta = global_position.y - body.global_position.y
-	if y_delta > STOMP_HIT_THRESHOLD and velocity.y <= 0:
+	if y_delta > STOMP_HIT_THRESHOLD and body.velocity.y >= 0:
 		# Player stomps boss from above
 		take_stomp()
 		body.jump()
