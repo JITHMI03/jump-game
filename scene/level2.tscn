@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://buawt8jeqjdwi" path="res://scene/main_character.tscn" id="4_qulpo"]
 [ext_resource type="PackedScene" uid="uid://bvjhvck0vyjwa" path="res://scene/collectable.tscn" id="5_jifot"]
 [ext_resource type="PackedScene" uid="uid://ck6eut5wtdkk7" path="res://scene/end.tscn" id="6_3opl0"]
-[ext_resource type="PackedScene" uid="uid://bnlvpkbhvfj2b" path="res://scene/main_menu.tscn" id="7_lnov8"]
+[ext_resource type="PackedScene" uid="uid://level3_scene" path="res://scene/level3.tscn" id="7_lnov8"]
 [ext_resource type="PackedScene" uid="uid://ctvyjakwuokpf" path="res://scene/enemy.tscn" id="8_kj7ci"]
 [ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="9_yilmc"]
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="10_epjhv"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="12_touch"]
 [ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="13_gameover"]
 [ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="14_lc"]
+[ext_resource type="Script" path="res://scene/music.gd" id="15_music"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_rmy57")
@@ -264,6 +265,11 @@ limit_bottom = 900
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
+[node name="bgm" type="AudioStreamPlayer" parent="scene object"]
+script = ExtResource("15_music")
+bus = "Master"
+
+
 [node name="collectables group" type="Node" parent="scene object" unique_id=837512204]
 
 [node name="collectable" parent="scene object/collectables group" unique_id=428107123 instance=ExtResource("5_jifot")]
@@ -481,6 +487,32 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_epjhv")
 expand_mode = 2
+
+[node name="multiplierlabel" type="Label" parent="ui" unique_id=999200001]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.8, 0.2, 0, 0.8)
+text = "x2 COMBO!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="touch_controls" parent="ui" unique_id=1398339102 instance=ExtResource("12_touch")]
 

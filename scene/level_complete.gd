@@ -7,7 +7,14 @@ var _next_level: PackedScene
 
 func show_complete(next_level: PackedScene) -> void:
 	_next_level = next_level
-	score_label.text = "Score: " + str(GameManager.points)
+	var pts = GameManager.points
+	var best = GameManager.best_score
+	# Update best score on level complete too
+	if pts > best:
+		GameManager.best_score = pts
+		GameManager._save_best_score()
+		best = pts
+	score_label.text = "Score: " + str(pts) + ("  |  Best: " + str(best) if best > 0 else "")
 	panel.show()
 	get_tree().paused = true
 

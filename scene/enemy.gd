@@ -38,6 +38,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		var x_delta = body.position.x - position.x
 		if y_delta > HIT_THRESHOLD:
 			_play_oneshot(sfx_stomp)
+			GameManager.trigger_stomp_multiplier()
 			queue_free()
 			body.jump()
 		else:

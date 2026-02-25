@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://enemy_fly_scene"]
+
+[ext_resource type="Script" path="res://scene/enemy_fly.gd" id="1_ef_script"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 18.0
+height = 36.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 30.0
+
+[node name="enemy_fly" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_ef_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="body_color" type="ColorRect" parent="."]
+offset_left = -18.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 12.0
+color = Color(1, 0.6, 0.1, 1)
+
+[node name="eye_left" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -16.0
+offset_right = -4.0
+offset_bottom = -8.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="eye_right" type="ColorRect" parent="."]
+offset_left = 4.0
+offset_top = -16.0
+offset_right = 10.0
+offset_bottom = -8.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="wing_left" type="ColorRect" parent="."]
+offset_left = -30.0
+offset_top = -28.0
+offset_right = -16.0
+offset_bottom = -10.0
+color = Color(0.7, 0.9, 1, 0.8)
+
+[node name="wing_right" type="ColorRect" parent="."]
+offset_left = 16.0
+offset_top = -28.0
+offset_right = 30.0
+offset_bottom = -10.0
+color = Color(0.7, 0.9, 1, 0.8)
+
+[node name="area_2d" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_2d"]
+shape = SubResource("CircleShape2D_hit")
+
+[connection signal="body_entered" from="area_2d" to="." method="_on_area_2d_body_entered"]

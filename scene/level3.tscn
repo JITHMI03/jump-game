@@ -1,0 +1,317 @@
+[gd_scene format=3 uid="uid://level3_scene"]
+
+[ext_resource type="Script" path="res://scene/level_ui.gd" id="1_lv3ui"]
+[ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="2_lv3terrain"]
+[ext_resource type="PackedScene" uid="uid://buawt8jeqjdwi" path="res://scene/main_character.tscn" id="3_lv3char"]
+[ext_resource type="PackedScene" uid="uid://bvjhvck0vyjwa" path="res://scene/collectable.tscn" id="4_lv3coll"]
+[ext_resource type="PackedScene" uid="uid://ck6eut5wtdkk7" path="res://scene/end.tscn" id="5_lv3end"]
+[ext_resource type="PackedScene" uid="uid://boss_level_scene" path="res://scene/boss_level.tscn" id="6_lv3menu"]
+[ext_resource type="PackedScene" uid="uid://ctvyjakwuokpf" path="res://scene/enemy.tscn" id="7_lv3enemy"]
+[ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="8_lv3fall"]
+[ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="9_lv3hearts"]
+[ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="10_lv3pause"]
+[ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="11_lv3touch"]
+[ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="12_lv3go"]
+[ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="13_lv3lc"]
+[ext_resource type="PackedScene" path="res://scene/moving_platform.tscn" id="14_lv3mp"]
+[ext_resource type="PackedScene" path="res://scene/checkpoint.tscn" id="15_lv3cp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lv3"]
+texture = ExtResource("2_lv3terrain")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:2/0 = 0
+8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_lv3"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_lv3")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lv3"]
+
+[node name="Node" type="Node"]
+
+[node name="gamemanager" type="Node" parent="." node_paths=PackedStringArray("hearts")]
+script = ExtResource("1_lv3ui")
+hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
+
+[node name="scene object" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="scene object"]
+texture_filter = 1
+position = Vector2(0, 48)
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_lv3")
+format = 2
+layer_0/tile_data = PackedInt32Array()
+
+[node name="Layer1" type="TileMapLayer" parent="scene object/TileMap"]
+texture_filter = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAQAHAAkAAAAAAAYAAQAHAAkAAAAAAA0AAQAHAAgAAAABAA0AAQAHAAgAAAACAA0AAQAHAAgAAAADAA0AAQAHAAgAAAAEAA0AAQAHAAgAAAAFAA0AAQAHAAgAAAAGAA0AAQAHAAgAAAAHAA0AAQAHAAgAAAAIAA0AAQAHAAgAAAAJAA0AAQAHAAgAAAAKAA0AAQAHAAgAAAALAA0AAQAHAAgAAAAMAA0AAQAHAAgAAAANAA0AAQAHAAgAAAAOAA0AAQAHAAgAAAAPAA0AAQAHAAgAAAAQAA0AAQAHAAgAAAARAA0AAQAHAAgAAAASAA0AAQAHAAgAAAATAA0AAQAHAAgAAAAUAA0AAQAHAAgAAAAVAA0AAQAHAAgAAAAWAA0AAQAHAAgAAAAXAA0AAQAHAAgAAAAYAA0AAQAHAAgAAAAZAA0AAQAHAAgAAAAaAA0AAQAHAAgAAAAbAA0AAQAHAAgAAAAAAAQAAQAHAAgAAAABAAQAAQAHAAgAAAACAAQAAQAHAAgAAAAAAAUAAQAHAAkAAAABAAUAAQAHAAkAAAACAAUAAQAHAAkAAAAIAAMAAQAGAAgAAAAJAAMAAQAIAAgAAAAIAAQAAQAGAAoAAAAJAAQAAQAIAAoAAAAIAAUAAQAGAAoAAAAJAAUAAQAIAAoAAAAQAAoAAQAGAAgAAAAQAAsAAQAGAAkAAAAQAAwAAQAGAAoAAAARAAsAAQAHAAkAAAARAAoAAQAHAAgAAAARAAwAAQAHAAoAAAASAAoAAQAIAAgAAAASAAsAAQAIAAkAAAASAAwAAQAIAAoAAAAVAAwAAQAHAAoAAAAWAAwAAQAHAAoAAAAUAAwAAQAGAAoAAAATAAoAAQAGAAkAAAATAAsAAQAGAAkAAAATAAwAAQAGAAkAAAAUAAoAAQAGAAkAAAAUAAsAAQAGAAkAAAAVAAsAAQAHAAkAAAAVAAoAAQAHAAkAAAAWAAsAAQAHAAkAAAAWAAoAAQAHAAkAAAAXAAsAAQAIAAkAAAAXAAoAAQAIAAkAAAAXAAwAAQAIAAoAAAAWAAQAAQARAAEAAAAXAAQAAQASAAEAAAAYAAQAAQASAAEAAAAZAAQAAQATAAEAAAD///7/AQAHAAoAAAABAP7/AQAHAAoAAAACAP7/AQAHAAoAAAADAP7/AQAHAAoAAAAEAP7/AQAHAAoAAAAFAP7/AQAHAAoAAAAGAP7/AQAHAAoAAAAHAP7/AQAHAAoAAAAIAP7/AQAHAAoAAAAJAP7/AQAHAAoAAAAKAP7/AQAHAAoAAAALAP7/AQAHAAoAAAAMAP7/AQAHAAoAAAANAP7/AQAHAAoAAAAOAP7/AQAHAAoAAAAPAP7/AQAHAAoAAAAQAP7/AQAHAAoAAAARAP7/AQAHAAoAAAASAP7/AQAHAAoAAAATAP7/AQAHAAoAAAAUAP7/AQAHAAoAAAAVAP7/AQAHAAoAAAAWAP7/AQAHAAoAAAAXAP7/AQAHAAoAAAAYAP7/AQAHAAoAAAAZAP7/AQAHAAoAAAAaAP7/AQAHAAoAAAAbAP7/AQAHAAoAAAAcAP7/AQAHAAoAAAAdAP7/AQAHAAoAAAAeAP7/AQAHAAoAAAA=")
+tile_set = SubResource("TileSet_lv3")
+
+[node name="CharacterBody2D" parent="scene object" instance=ExtResource("3_lv3char")]
+position = Vector2(17, 41)
+
+[node name="Camera2D" type="Camera2D" parent="scene object/CharacterBody2D"]
+position = Vector2(36, 162)
+limit_left = 0
+limit_top = -400
+limit_right = 3200
+limit_bottom = 900
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="collectables group" type="Node" parent="scene object"]
+
+[node name="collectable" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(250, 390)
+
+[node name="collectable2" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(450, 300)
+
+[node name="collectable3" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(650, 250)
+
+[node name="collectable4" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(900, 150)
+
+[node name="collectable5" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(1100, 200)
+
+[node name="collectable6" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(1400, 350)
+
+[node name="collectable7" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(1600, 250)
+
+[node name="collectable8" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(1800, 150)
+
+[node name="collectable9" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(2100, 300)
+
+[node name="collectable10" parent="scene object/collectables group" instance=ExtResource("4_lv3coll")]
+position = Vector2(2400, 150)
+
+[node name="enemies" type="Node" parent="scene object"]
+
+[node name="enemy" parent="scene object/enemies" instance=ExtResource("7_lv3enemy")]
+position = Vector2(400, 430)
+
+[node name="enemy2" parent="scene object/enemies" instance=ExtResource("7_lv3enemy")]
+position = Vector2(700, 430)
+
+[node name="enemy3" parent="scene object/enemies" instance=ExtResource("7_lv3enemy")]
+position = Vector2(1100, 430)
+
+[node name="enemy4" parent="scene object/enemies" instance=ExtResource("7_lv3enemy")]
+position = Vector2(1500, 430)
+
+[node name="enemy5" parent="scene object/enemies" instance=ExtResource("7_lv3enemy")]
+position = Vector2(2000, 430)
+
+[node name="moving_platforms" type="Node" parent="scene object"]
+
+[node name="moving_platform1" parent="scene object/moving_platforms" instance=ExtResource("14_lv3mp")]
+position = Vector2(850, 250)
+
+[node name="moving_platform2" parent="scene object/moving_platforms" instance=ExtResource("14_lv3mp")]
+position = Vector2(1250, 180)
+move_distance = 150.0
+
+[node name="moving_platform3" parent="scene object/moving_platforms" instance=ExtResource("14_lv3mp")]
+position = Vector2(1700, 200)
+move_vertical = true
+move_distance = 120.0
+
+[node name="moving_platform4" parent="scene object/moving_platforms" instance=ExtResource("14_lv3mp")]
+position = Vector2(2200, 250)
+
+[node name="checkpoint1" parent="scene object" instance=ExtResource("15_lv3cp")]
+position = Vector2(1300, 410)
+
+[node name="end" parent="scene object" instance=ExtResource("5_lv3end")]
+position = Vector2(2700, 349)
+target_level = ExtResource("6_lv3menu")
+
+[node name="fall_area" type="Area2D" parent="scene object"]
+position = Vector2(1500, 900)
+script = ExtResource("8_lv3fall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene object/fall_area"]
+shape = SubResource("WorldBoundaryShape2D_lv3")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="ui"]
+offset_left = 39.0
+offset_top = 18.0
+offset_right = 250.0
+offset_bottom = 71.0
+
+[node name="pointslabel" type="Label" parent="ui/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Collected : 0"
+horizontal_alignment = 1
+
+[node name="multiplierlabel" type="Label" parent="ui"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.8, 0.2, 0, 0.8)
+text = "x2 COMBO!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pause" type="Node" parent="ui"]
+process_mode = 3
+script = ExtResource("10_lv3pause")
+
+[node name="PausePanel" type="Panel" parent="ui/pause"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ui/pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.5
+offset_top = -63.0
+offset_right = 165.5
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/pause/PausePanel/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -5.0
+offset_right = 173.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="resume" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Resume"
+
+[node name="menu" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="hearts" type="Panel" parent="ui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -194.0
+offset_top = 15.0
+offset_bottom = 62.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/hearts"]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 194.0
+offset_bottom = 22.5
+grow_vertical = 2
+alignment = 1
+
+[node name="heart" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("9_lv3hearts")
+expand_mode = 2
+
+[node name="heart2" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("9_lv3hearts")
+expand_mode = 2
+
+[node name="heart3" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("9_lv3hearts")
+expand_mode = 2
+
+[node name="touch_controls" parent="ui" instance=ExtResource("11_lv3touch")]
+
+[node name="game_over" parent="ui" instance=ExtResource("12_lv3go")]
+
+[node name="level_complete" parent="ui" instance=ExtResource("13_lv3lc")]
+
+[connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/menu" to="ui/pause" method="_on_menu_pressed"]

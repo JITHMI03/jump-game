@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://moving_platform_scene"]
+
+[ext_resource type="Script" path="res://scene/moving_platform.gd" id="1_mp_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(128, 24)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_platform"]
+bg_color = Color(0.2, 0.6, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="moving_platform" type="AnimatableBody2D"]
+sync_to_physics = false
+script = ExtResource("1_mp_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="visual" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -12.0
+offset_right = 64.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_platform")
+mouse_filter = 2

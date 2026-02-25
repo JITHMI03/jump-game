@@ -1,0 +1,278 @@
+[gd_scene format=3 uid="uid://boss_level_scene"]
+
+[ext_resource type="Script" path="res://scene/boss_level.gd" id="1_bl_script"]
+[ext_resource type="Script" path="res://scene/level_ui.gd" id="2_bl_ui"]
+[ext_resource type="PackedScene" uid="uid://buawt8jeqjdwi" path="res://scene/main_character.tscn" id="3_bl_char"]
+[ext_resource type="PackedScene" path="res://scene/boss.tscn" id="4_bl_boss"]
+[ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="5_bl_fall"]
+[ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="6_bl_hearts"]
+[ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="7_bl_pause"]
+[ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="8_bl_touch"]
+[ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="9_bl_go"]
+[ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="10_bl_lc"]
+[ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="11_bl_terrain"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl"]
+texture = ExtResource("11_bl_terrain")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_bl"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_bl")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bl"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_bl_script")
+
+[node name="gamemanager" type="Node" parent="." node_paths=PackedStringArray("hearts")]
+script = ExtResource("2_bl_ui")
+hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
+
+[node name="scene object" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="scene object"]
+texture_filter = 1
+position = Vector2(0, 48)
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_bl")
+format = 2
+layer_0/tile_data = PackedInt32Array()
+
+[node name="Layer1" type="TileMapLayer" parent="scene object/TileMap"]
+texture_filter = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAQAHAAkAAAAAAAYAAQAHAAkAAAAAAA0AAQAHAAgAAAABAA0AAQAHAAgAAAACAA0AAQAHAAgAAAADAA0AAQAHAAgAAAAEAA0AAQAHAAgAAAAFAA0AAQAHAAgAAAAGAA0AAQAHAAgAAAAHAA0AAQAHAAgAAAAIAA0AAQAHAAgAAAAJAA0AAQAHAAgAAAAKAA0AAQAHAAgAAAALAA0AAQAHAAgAAAAMAA0AAQAHAAgAAAANAA0AAQAHAAgAAAAOAA0AAQAHAAgAAAAPAA0AAQAHAAgAAAAQAA0AAQAHAAgAAAARAA0AAQAHAAgAAAAAAAQAAQAHAAgAAAABAAQAAQAHAAgAAAACAAQAAQAHAAgAAAAAAAUAAQAHAAkAAAABAAUAAQAHAAkAAAACAAUAAQAHAAkAAAAIAAMAAQAGAAgAAAAJAAMAAQAIAAgAAAAIAAQAAQAGAAoAAAAJAAQAAQAIAAoAAAAIAAUAAQAGAAoAAAAJAAUAAQAIAAoAAAD///7/AQAHAAoAAAABAP7/AQAHAAoAAAACAP7/AQAHAAoAAAADAP7/AQAHAAoAAAAEAP7/AQAHAAoAAAAFAP7/AQAHAAoAAAAGAP7/AQAHAAoAAAAHAP7/AQAHAAoAAAAIAP7/AQAHAAoAAAAJAP7/AQAHAAoAAAAKAP7/AQAHAAoAAAALAP7/AQAHAAoAAAAMAP7/AQAHAAoAAAANAP7/AQAHAAoAAAAOAP7/AQAHAAoAAAAPAP7/AQAHAAoAAAAQAP7/AQAHAAoAAAARAP7/AQAHAAoAAAA=")
+tile_set = SubResource("TileSet_bl")
+
+[node name="CharacterBody2D" parent="scene object" instance=ExtResource("3_bl_char")]
+position = Vector2(100, 41)
+
+[node name="Camera2D" type="Camera2D" parent="scene object/CharacterBody2D"]
+position = Vector2(36, 162)
+limit_left = 0
+limit_top = -300
+limit_right = 1400
+limit_bottom = 700
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="boss" parent="scene object" instance=ExtResource("4_bl_boss")]
+position = Vector2(750, 380)
+
+[node name="fall_area" type="Area2D" parent="scene object"]
+position = Vector2(700, 700)
+script = ExtResource("5_bl_fall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene object/fall_area"]
+shape = SubResource("WorldBoundaryShape2D_bl")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="ui"]
+offset_left = 39.0
+offset_top = 18.0
+offset_right = 250.0
+offset_bottom = 71.0
+
+[node name="pointslabel" type="Label" parent="ui/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Collected : 0"
+horizontal_alignment = 1
+
+[node name="multiplierlabel" type="Label" parent="ui"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.8, 0.2, 0, 0.8)
+text = "x2 COMBO!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="boss_health_ui" type="Panel" parent="ui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -200.0
+offset_top = 15.0
+offset_right = 200.0
+offset_bottom = 55.0
+grow_horizontal = 2
+
+[node name="label" type="Label" parent="ui/boss_health_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 0.4
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+text = "BOSS"
+horizontal_alignment = 1
+
+[node name="bar_bg" type="ColorRect" parent="ui/boss_health_ui"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+grow_vertical = 0
+color = Color(0.2, 0.2, 0.2, 0.8)
+
+[node name="bar_fill" type="ColorRect" parent="ui/boss_health_ui/bar_bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9, 0.2, 0.2, 1)
+
+[node name="pause" type="Node" parent="ui"]
+process_mode = 3
+script = ExtResource("7_bl_pause")
+
+[node name="PausePanel" type="Panel" parent="ui/pause"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ui/pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.5
+offset_top = -63.0
+offset_right = 165.5
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/pause/PausePanel/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -5.0
+offset_right = 173.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="resume" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Resume"
+
+[node name="menu" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="hearts" type="Panel" parent="ui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -194.0
+offset_top = 15.0
+offset_bottom = 62.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/hearts"]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 194.0
+offset_bottom = 22.5
+grow_vertical = 2
+alignment = 1
+
+[node name="heart" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_bl_hearts")
+expand_mode = 2
+
+[node name="heart2" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_bl_hearts")
+expand_mode = 2
+
+[node name="heart3" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_bl_hearts")
+expand_mode = 2
+
+[node name="touch_controls" parent="ui" instance=ExtResource("8_bl_touch")]
+
+[node name="game_over" parent="ui" instance=ExtResource("9_bl_go")]
+
+[node name="level_complete" parent="ui" instance=ExtResource("10_bl_lc")]
+
+[connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/menu" to="ui/pause" method="_on_menu_pressed"]
