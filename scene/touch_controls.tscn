@@ -12,6 +12,66 @@ size = Vector2(130, 130)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pause"]
 size = Vector2(80, 80)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_left"]
+bg_color = Color(1.0, 0.82, 0.2, 0.85)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.35, 0.2, 0.05, 1.0)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.0, 0.0, 0.0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_right"]
+bg_color = Color(1.0, 0.82, 0.2, 0.85)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.35, 0.2, 0.05, 1.0)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.0, 0.0, 0.0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jump"]
+bg_color = Color(0.96, 0.35, 0.35, 0.85)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5, 0.08, 0.08, 1.0)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.0, 0.0, 0.0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause"]
+bg_color = Color(0.72, 0.55, 0.85, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.35, 0.18, 0.5, 1.0)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.0, 0.0, 0.0, 0.35)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
 [node name="touch_controls" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -38,9 +98,19 @@ grow_horizontal = 1
 grow_vertical = 0
 mouse_filter = 2
 
+[node name="bg" type="Panel" parent="btn_left_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_left")
+mouse_filter = 2
+
 [node name="btn_left" type="TouchScreenButton" parent="btn_left_anchor"]
 position = Vector2(0, 0)
-modulate = Color(0.2, 0.2, 0.2, 0.6)
+modulate = Color(1, 1, 1, 0)
 action = "left"
 shape = SubResource("RectangleShape2D_left")
 passby_press = true
@@ -53,8 +123,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 52
-text = "<"
+theme_override_font_sizes/font_size = 54
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.1, 0.0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "◀"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -74,9 +148,19 @@ grow_horizontal = 1
 grow_vertical = 0
 mouse_filter = 2
 
+[node name="bg" type="Panel" parent="btn_right_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_right")
+mouse_filter = 2
+
 [node name="btn_right" type="TouchScreenButton" parent="btn_right_anchor"]
 position = Vector2(0, 0)
-modulate = Color(0.2, 0.2, 0.2, 0.6)
+modulate = Color(1, 1, 1, 0)
 action = "right"
 shape = SubResource("RectangleShape2D_right")
 passby_press = true
@@ -89,8 +173,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 52
-text = ">"
+theme_override_font_sizes/font_size = 54
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.1, 0.0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "▶"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -110,9 +198,19 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
+[node name="bg" type="Panel" parent="btn_jump_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jump")
+mouse_filter = 2
+
 [node name="btn_jump" type="TouchScreenButton" parent="btn_jump_anchor"]
 position = Vector2(0, 0)
-modulate = Color(0.2, 0.2, 0.2, 0.6)
+modulate = Color(1, 1, 1, 0)
 action = "jump"
 shape = SubResource("RectangleShape2D_jump")
 passby_press = false
@@ -125,8 +223,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 52
-text = "^"
+theme_override_font_sizes/font_size = 54
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.3, 0.0, 0.0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "▲"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
@@ -146,9 +248,19 @@ grow_horizontal = 0
 grow_vertical = 1
 mouse_filter = 2
 
+[node name="bg" type="Panel" parent="btn_pause_anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pause")
+mouse_filter = 2
+
 [node name="btn_pause" type="TouchScreenButton" parent="btn_pause_anchor"]
 position = Vector2(0, 0)
-modulate = Color(0.2, 0.2, 0.2, 0.6)
+modulate = Color(1, 1, 1, 0)
 action = "pause"
 shape = SubResource("RectangleShape2D_pause")
 passby_press = false
@@ -161,8 +273,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 36
-text = "||"
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.15, 0.05, 0.25, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+text = "⏸"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
