@@ -45,6 +45,11 @@ pause={
 ]
 }
 
+[autoload]
+
+GameManager="*res://game_manager.gd"
+Transition="*res://scene/transition.gd"
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true

@@ -10,6 +10,12 @@ const FLICKER_INTERVAL = 0.2
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var camera: Camera2D = $Camera2D
+@onready var _sfx: AudioStreamPlayer = $SFX
+
+@export var sfx_jump: AudioStream
+@export var sfx_double_jump: AudioStream
+@export var sfx_land: AudioStream
+@export var sfx_hit: AudioStream
 
 var jump_count = 0
 var invincible_timer := 0.0
@@ -23,18 +29,31 @@ func _ready() -> void:
 func is_invincible() -> bool:
 	return invincible_timer > 0.0
 
+func _play_sfx(stream: AudioStream) -> void:
+	if stream and _sfx:
+		_sfx.stream = stream
+		_sfx.play()
+
 # Called by enemies — respects invincibility frames
 func take_hit() -> bool:
 	if is_invincible():
 		return false
 	invincible_timer = INVINCIBLE_DURATION
 	_screen_shake(6.0, 0.2)
+	_play_sfx(sfx_hit)
 	return true
 
 # Called by fall_area — always triggers (falling is not blockable)
 func take_fall_hit() -> void:
 	invincible_timer = INVINCIBLE_DURATION
 	_screen_shake(6.0, 0.2)
+	_play_sfx(sfx_hit)
+
+func reset_jump_state() -> void:
+	jump_count = 0
+	coyote_timer = 0.0
+	jump_buffer_timer = 0.0
+	was_on_floor = false
 
 func _screen_shake(strength: float, duration: float) -> void:
 	var tween = create_tween()
@@ -81,9 +100,17 @@ func _physics_process(delta: float) -> void:
 	var double_jump = not on_floor and coyote_timer <= 0.0 and jump_count == 1
 	if jump_buffer_timer > 0.0 and (can_jump or double_jump):
 		velocity.y = JUMP_VELOCITY
+		if jump_count == 0:
+			_play_sfx(sfx_jump)
+		else:
+			_play_sfx(sfx_double_jump)
 		jump_count += 1
 		jump_buffer_timer = 0.0
 		coyote_timer = 0.0
+
+	# --- Land sound ---
+	if on_floor and not was_on_floor:
+		_play_sfx(sfx_land)
 
 	# --- Gravity ---
 	if not on_floor:

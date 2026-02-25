@@ -258,3 +258,5 @@ frame_progress = 0.39635378
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=236030132]
 position = Vector2(35.5, 154.5)
 shape = SubResource("RectangleShape2D_fe874")
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=999100001]

@@ -2,8 +2,8 @@ extends Node
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	Transition.fade_to_scene(get_tree().current_scene.scene_file_path)
 
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scene/main_menu.tscn")
+	Transition.fade_to_scene("res://scene/main_menu.tscn")

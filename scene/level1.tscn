@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cx77soagcktcb"]
 
-[ext_resource type="Script" uid="uid://cjsik8187erjy" path="res://game_manager.gd" id="1_crycw"]
+[ext_resource type="Script" path="res://scene/level_ui.gd" id="1_crycw"]
 [ext_resource type="Texture2D" uid="uid://dway1xf1s234n" path="res://Purple.png" id="2_i2041"]
 [ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="3_xy4tn"]
 [ext_resource type="PackedScene" uid="uid://buawt8jeqjdwi" path="res://scene/main_character.tscn" id="4_usj0q"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="11_hearts"]
 [ext_resource type="PackedScene" uid="uid://ctvyjakwuokpf" path="res://scene/enemy.tscn" id="12_enemy"]
 [ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="13_gameover"]
+[ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="14_lc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("3_xy4tn")
@@ -199,7 +200,6 @@ sources/1 = SubResource("TileSetAtlasSource_7mycd")
 [node name="Node" type="Node" unique_id=113244691]
 
 [node name="gamemanager" type="Node" parent="." unique_id=1359945493 node_paths=PackedStringArray("hearts")]
-unique_name_in_owner = true
 script = ExtResource("1_crycw")
 hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
 game_over_node = NodePath("../ui/game_over")
@@ -359,6 +359,7 @@ position = Vector2(1380, 460)
 [node name="end" parent="scene object" unique_id=1475683813 instance=ExtResource("6_mx85b")]
 position = Vector2(3010, 349)
 target_level = ExtResource("7_ebr37")
+level_complete_node = NodePath("../../ui/level_complete")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="scene object" unique_id=1975430624]
 
@@ -497,6 +498,8 @@ expand_mode = 2
 [node name="touch_controls" parent="ui" instance=ExtResource("9_touch")]
 
 [node name="game_over" parent="ui" instance=ExtResource("13_gameover")]
+
+[node name="level_complete" parent="ui" instance=ExtResource("14_lc")]
 
 [connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
