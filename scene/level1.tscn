@@ -202,7 +202,6 @@ sources/1 = SubResource("TileSetAtlasSource_7mycd")
 [node name="gamemanager" type="Node" parent="." unique_id=1359945493 node_paths=PackedStringArray("hearts")]
 script = ExtResource("1_crycw")
 hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
-game_over_node = NodePath("../ui/game_over")
 
 [node name="scene object" type="Node" parent="." unique_id=177684991]
 
@@ -359,7 +358,6 @@ position = Vector2(1380, 460)
 [node name="end" parent="scene object" unique_id=1475683813 instance=ExtResource("6_mx85b")]
 position = Vector2(3010, 349)
 target_level = ExtResource("7_ebr37")
-level_complete_node = NodePath("../../ui/level_complete")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="scene object" unique_id=1975430624]
 

@@ -1,7 +1,6 @@
 extends Node
 
 @export var hearts: Array[Node]
-@export var game_over_node: Node
 @onready var pointslabel: Label = %pointslabel
 
 func _ready() -> void:
@@ -19,13 +18,13 @@ func _on_points_changed(pts: int) -> void:
 	pointslabel.text = "Collected: " + str(pts)
 
 func _on_game_over(pts: int) -> void:
-	if game_over_node:
-		var panel = game_over_node.get_node_or_null("GameOverPanel")
-		if panel:
-			var score_lbl = panel.get_node_or_null("VBoxContainer/score_label")
-			if score_lbl:
-				score_lbl.text = "Score: " + str(pts)
-			panel.show()
+	var root = get_tree().current_scene
+	var panel = root.get_node_or_null("ui/game_over/GameOverPanel")
+	if panel:
+		var score_lbl = panel.get_node_or_null("VBoxContainer/score_label")
+		if score_lbl:
+			score_lbl.text = "Score: " + str(pts)
+		panel.show()
 	get_tree().paused = true
 
 func _refresh_hearts(lives: int) -> void:
