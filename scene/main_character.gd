@@ -20,12 +20,18 @@ var was_on_floor := false
 func is_invincible() -> bool:
 	return invincible_timer > 0.0
 
+# Called by enemies — respects invincibility frames
 func take_hit() -> bool:
 	if is_invincible():
 		return false
 	invincible_timer = INVINCIBLE_DURATION
 	_screen_shake(6.0, 0.2)
 	return true
+
+# Called by fall_area — always triggers (falling is not blockable)
+func take_fall_hit() -> void:
+	invincible_timer = INVINCIBLE_DURATION
+	_screen_shake(6.0, 0.2)
 
 func _screen_shake(strength: float, duration: float) -> void:
 	var tween = create_tween()
