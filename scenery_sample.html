@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Art Animated Scenery Sample</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            font-family: monospace;
+            flex-direction: column;
+        }
+
+        svg {
+            /* This ensures any scaling of the SVG stays blocky/pixelated */
+            image-rendering: pixelated;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border-radius: 4px;
+            background-color: #5c94fc;
+            /* Classic Mario blue sky */
+            width: 960px;
+            /* 320 * 3 */
+            height: 540px;
+            /* 180 * 3 */
+        }
+
+        .info {
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        <h2>Retro Pixel-Art Background Prototype</h2>
+        <p>This sample uses a low-resolution base (320x180) scaled up with <i>crisp edges</i> to match the 16x16 pixel
+            terrain of your game.</p>
+        <p>Like before, we will slice these into raw image layers and use Godot's <code>ParallaxBackground</code> to
+            achieve this scrolling effect in the actual game.</p>
+    </div>
+
+    <!-- Viewbox is intentionally small so shapes act like "pixels" -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" shape-rendering="crispEdges">
+        <style>
+            .layer-clouds-slow {
+                animation: scroll 60s linear infinite;
+            }
+
+            .layer-clouds-fast {
+                animation: scroll 40s linear infinite;
+            }
+
+            .layer-mountains-back {
+                animation: scroll 30s linear infinite;
+            }
+
+            .layer-bushes-front {
+                animation: scroll 15s linear infinite;
+            }
+
+            @keyframes scroll {
+                from {
+                    transform: translateX(0px);
+                }
+
+                to {
+                    transform: translateX(-320px);
+                }
+            }
+        </style>
+
+        <defs>
+            <!-- Defining a simple pixel-art style cloud -->
+            <g id="cloud-small">
+                <!-- White top -->
+                <rect x="16" y="0" width="32" height="16" fill="#fff" />
+                <rect x="0" y="8" width="16" height="8" fill="#fff" />
+                <rect x="48" y="8" width="16" height="8" fill="#fff" />
+                <!-- Gray bottom shadow -->
+                <rect x="16" y="16" width="32" height="4" fill="#c4d4e1" />
+                <rect x="0" y="16" width="16" height="4" fill="#c4d4e1" />
+                <rect x="48" y="16" width="16" height="4" fill="#c4d4e1" />
+                <rect x="0" y="20" width="64" height="4" fill="#fff" />
+            </g>
+
+            <g id="cloud-large">
+                <rect x="24" y="0" width="48" height="24" fill="#fff" />
+                <rect x="0" y="8" width="24" height="16" fill="#fff" />
+                <rect x="72" y="16" width="24" height="8" fill="#fff" />
+                <rect x="24" y="24" width="48" height="4" fill="#c4d4e1" />
+                <rect x="0" y="24" width="24" height="4" fill="#c4d4e1" />
+                <rect x="72" y="24" width="24" height="4" fill="#c4d4e1" />
+                <rect x="0" y="28" width="96" height="4" fill="#fff" />
+            </g>
+
+            <!-- Distant Blocky Mountains/Hills -->
+            <g id="mountain-back">
+                <path d="M0,80 L20,60 L20,40 L40,20 L60,20 L80,40 L80,60 L100,80 Z" fill="#4488ff" />
+                <path d="M20,60 L20,40 L40,20 L60,20 L80,40 L80,60 Z" fill="#77aaff" />
+                <path d="M40,30 L60,30 L60,40 L40,40 Z" fill="#ccddff" /> <!-- pseudo snow tip -->
+            </g>
+
+            <g id="hill-mid">
+                <path d="M0,60 L10,50 L20,30 L40,10 L50,10 L70,30 L80,50 L90,60 Z" fill="#00c800" />
+                <!-- Hill highlight -->
+                <path d="M0,50 L10,40 L20,20 L40,0 L50,0 L70,20 L80,40 L90,50 Z" fill="#00e800" />
+                <!-- Outline/detail -->
+                <rect x="15" y="15" width="5" height="5" fill="#00a800" />
+                <rect x="40" y="30" width="10" height="5" fill="#00a800" />
+            </g>
+
+            <g id="bush-front">
+                <rect x="10" y="0" width="20" height="10" fill="#f8b800" />
+                <rect x="0" y="10" width="40" height="10" fill="#f8b800" />
+                <!-- Dark outline/shadow -->
+                <rect x="10" y="10" width="20" height="5" fill="#d88000" />
+                <rect x="0" y="20" width="40" height="5" fill="#d88000" />
+            </g>
+        </defs>
+
+        <!-- Sky Base layer is static -->
+
+        <!-- We create duplicates inside scrolling layers so it loops seamlessly (0 to 320 to 640) -->
+
+        <!-- Slow Clouds Layer -->
+        <g class="layer-clouds-slow">
+            <use href="#cloud-small" x="40" y="30" />
+            <use href="#cloud-small" x="220" y="60" />
+            <!-- Duplicate for looping -->
+            <use href="#cloud-small" x="360" y="30" />
+            <use href="#cloud-small" x="540" y="60" />
+        </g>
+
+        <!-- Fast Clouds Layer -->
+        <g class="layer-clouds-fast">
+            <use href="#cloud-large" x="120" y="20" />
+            <use href="#cloud-small" x="290" y="80" />
+            <!-- Duplicate for looping -->
+            <use href="#cloud-large" x="440" y="20" />
+            <use href="#cloud-small" x="610" y="80" />
+        </g>
+
+        <!-- Distant Background Mountains -->
+        <g class="layer-mountains-back" transform="translate(0, 100)">
+            <use href="#mountain-back" x="10" y="0" />
+            <use href="#mountain-back" x="160" y="10" />
+            <!-- Duplicate for looping -->
+            <use href="#mountain-back" x="330" y="0" />
+            <use href="#mountain-back" x="480" y="10" />
+        </g>
+
+        <!-- Foreground Bushes/Hills Layer (closest to terrain) -->
+        <g class="layer-bushes-front" transform="translate(0, 120)">
+            <use href="#hill-mid" x="60" y="0" />
+            <use href="#bush-front" x="20" y="35" />
+            <use href="#hill-mid" x="220" y="5" />
+            <use href="#bush-front" x="160" y="40" />
+            <use href="#bush-front" x="280" y="30" />
+            <!-- Duplicate for looping -->
+            <use href="#hill-mid" x="380" y="0" />
+            <use href="#bush-front" x="340" y="35" />
+            <use href="#hill-mid" x="540" y="5" />
+            <use href="#bush-front" x="480" y="40" />
+            <use href="#bush-front" x="600" y="30" />
+        </g>
+
+    </svg>
+</body>
+
+</html>

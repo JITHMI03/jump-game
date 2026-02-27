@@ -12,6 +12,7 @@ func _play_sfx(stream: AudioStream) -> void:
 		return
 	var p = AudioStreamPlayer.new()
 	p.stream = stream
+	p.pitch_scale = randf_range(0.95, 1.05)
 	get_tree().root.add_child(p)
 	p.play()
 	p.finished.connect(p.queue_free)
@@ -25,6 +26,20 @@ func _ready() -> void:
 	GameManager.points_changed.connect(_on_points_changed)
 	GameManager.game_over.connect(_on_game_over)
 	GameManager.multiplier_changed.connect(_on_multiplier_changed)
+	# Show tutorial hints on first play
+	_show_level_hints()
+
+func _show_level_hints() -> void:
+	await get_tree().create_timer(0.5).timeout
+	var scene_path = get_tree().current_scene.scene_file_path
+	if "level1" in scene_path:
+		Tutorial.show("controls", "Arrow keys/WASD to move, Space to jump!")
+	elif "level2" in scene_path:
+		Tutorial.show("dash", "Press Shift to dash through enemies!")
+	elif "level3" in scene_path:
+		Tutorial.show("walljump", "Jump into walls to wall-slide and wall-jump!")
+	elif "boss" in scene_path:
+		Tutorial.show("boss", "Stomp the boss 3 times to defeat it!")
 
 func _on_health_changed(lives: int) -> void:
 	_refresh_hearts(lives)
@@ -35,8 +50,10 @@ func _on_points_changed(pts: int) -> void:
 	pointslabel.text = "Collected: " + str(pts)
 
 func _on_multiplier_changed(mult: int) -> void:
-	if mult > 1:
-		multiplierlabel.text = "x" + str(mult) + " COMBO!"
+	# Use the actual multiplier from GameManager to avoid desync
+	var actual_mult = GameManager.multiplier
+	if actual_mult > 1:
+		multiplierlabel.text = "x" + str(actual_mult) + " COMBO!"
 		multiplierlabel.visible = true
 	else:
 		multiplierlabel.visible = false

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://tutorial_hint_scene"]
+
+[ext_resource type="Script" path="res://scene/tutorial_hint.gd" id="1_hint_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
+bg_color = Color(0.1, 0.1, 0.2, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.8, 1, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[node name="TutorialHint" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_hint_script")
+
+[node name="HintPanel" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
+
+[node name="Label" type="Label" parent="HintPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Hint text here"
+horizontal_alignment = 1
+vertical_alignment = 1

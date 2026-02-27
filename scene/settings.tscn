@@ -105,6 +105,21 @@ layout_mode = 2
 button_pressed = true
 text = "On"
 
+[node name="difficulty_row" type="HBoxContainer" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="difficulty_lbl" type="Label" parent="SettingsPanel/VBoxContainer/difficulty_row"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 0)
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Difficulty"
+
+[node name="difficulty_btn" type="OptionButton" parent="SettingsPanel/VBoxContainer/difficulty_row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+
 [node name="close_btn" type="Button" parent="SettingsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
@@ -113,4 +128,5 @@ text = "Close"
 [connection signal="value_changed" from="SettingsPanel/VBoxContainer/master_row/master_slider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="SettingsPanel/VBoxContainer/sfx_row/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="toggled" from="SettingsPanel/VBoxContainer/touch_row/touch_toggle" to="." method="_on_touch_toggle_toggled"]
+[connection signal="item_selected" from="SettingsPanel/VBoxContainer/difficulty_row/difficulty_btn" to="." method="_on_difficulty_btn_item_selected"]
 [connection signal="pressed" from="SettingsPanel/VBoxContainer/close_btn" to="." method="_on_close_pressed"]

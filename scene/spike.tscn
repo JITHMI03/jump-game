@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://spike_trap_scene"]
+
+[ext_resource type="Script" path="res://scene/spike.gd" id="1_spike_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(32, 24)
+
+[node name="Spike" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_spike_script")
+
+[node name="spike_visual" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = 0.0
+color = Color(0.5, 0.5, 0.5, 1)
+pivot_offset = Vector2(16, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_spike")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

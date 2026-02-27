@@ -7,6 +7,7 @@ func _play_sfx(stream: AudioStream) -> void:
 		return
 	var p = AudioStreamPlayer.new()
 	p.stream = stream
+	p.pitch_scale = randf_range(0.95, 1.05)
 	get_tree().root.add_child(p)
 	p.play()
 	p.finished.connect(p.queue_free)
@@ -16,14 +17,18 @@ func _ready() -> void:
 	if boss:
 		boss.boss_defeated.connect(_on_boss_defeated)
 		boss.health_changed.connect(_on_boss_health_changed)
-	# Initialize bar to full
-	_on_boss_health_changed(3)
+		# Initialize bar to full only if boss exists
+		_on_boss_health_changed(boss.hp if boss.has_method("get") else 3)
+	else:
+		push_warning("Boss node not found at 'scene object/boss'")
 
 func _on_boss_health_changed(hp: int) -> void:
 	var bar = get_node_or_null("ui/boss_health_ui/bar_bg/bar_fill")
 	if bar:
-		var pct = float(hp) / 3.0
-		bar.anchor_right = pct
+		var pct = max(0.0, float(hp)) / 3.0
+		# Use size instead of anchor for consistency with boss.gd
+		bar.custom_minimum_size.x = pct * bar.get_parent().size.x
+		bar.size.x = pct * bar.get_parent().size.x
 
 func _on_boss_defeated() -> void:
 	_play_sfx(sfx_boss_defeat)

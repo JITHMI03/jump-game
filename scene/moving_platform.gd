@@ -3,26 +3,24 @@ extends AnimatableBody2D
 @export var move_distance := 200.0
 @export var move_speed := 80.0
 @export var move_vertical := false
+@export_enum("Positive:1", "Negative:-1") var start_direction: int = 1
+@export var use_easing := true
 
 var _start_pos: Vector2
-var _dir := 1.0
 
 func _ready() -> void:
 	_start_pos = position
-
-func _physics_process(delta: float) -> void:
-	var travel = _dir * move_speed * delta
+	var duration = move_distance / move_speed
+	var tween = create_tween().set_loops()
+	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	
+	var trans = Tween.TRANS_SINE if use_easing else Tween.TRANS_LINEAR
+	
+	var target_pos = _start_pos
 	if move_vertical:
-		position.y += travel
-		var dist = position.y - _start_pos.y
-		if dist >= move_distance:
-			_dir = -1.0
-		elif dist <= 0.0:
-			_dir = 1.0
+		target_pos.y += move_distance * start_direction
 	else:
-		position.x += travel
-		var dist = position.x - _start_pos.x
-		if dist >= move_distance:
-			_dir = -1.0
-		elif dist <= 0.0:
-			_dir = 1.0
+		target_pos.x += move_distance * start_direction
+		
+	tween.tween_property(self, "position", target_pos, duration).set_trans(trans).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", _start_pos, duration).set_trans(trans).set_ease(Tween.EASE_IN_OUT)

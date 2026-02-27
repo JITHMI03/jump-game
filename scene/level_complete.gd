@@ -13,6 +13,7 @@ func _play_sfx(stream: AudioStream) -> void:
 		return
 	var p = AudioStreamPlayer.new()
 	p.stream = stream
+	p.pitch_scale = randf_range(0.95, 1.05)
 	get_tree().root.add_child(p)
 	p.play()
 	p.finished.connect(p.queue_free)
@@ -20,11 +21,19 @@ func _play_sfx(stream: AudioStream) -> void:
 func show_complete(next_level: PackedScene) -> void:
 	_next_level = next_level
 	var pts = GameManager.points
+	# Save best score through GameManager (handles comparison internally)
+	GameManager.save_best_score()
+	# Mark current level as complete
+	var scene_path = get_tree().current_scene.scene_file_path
+	if "level1" in scene_path:
+		GameManager.mark_level_complete("level1")
+	elif "level2" in scene_path:
+		GameManager.mark_level_complete("level2")
+	elif "level3" in scene_path:
+		GameManager.mark_level_complete("level3")
+	elif "boss" in scene_path:
+		GameManager.mark_level_complete("boss")
 	var best = GameManager.best_score
-	if pts > best:
-		GameManager.best_score = pts
-		GameManager.save_best_score()
-		best = pts
 	score_label.text = "Score: " + str(pts) + ("  |  Best: " + str(best) if best > 0 else "")
 	# Update next button text
 	var next_btn = panel.get_node_or_null("VBoxContainer/next")

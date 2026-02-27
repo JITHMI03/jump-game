@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -1000.0
 const STOMP_GRAVITY_MULT = 6.0
 const STOMP_HIT_THRESHOLD = 60.0
 const MAX_HEALTH = 3
+const KNOCKBACK_STRENGTH = 650.0  # Boss hits harder
 const PHASE_INTERVAL = 4.0
 const CHARGE_DURATION = 0.7
 const SLAM_RISE_WAIT = 0.5
@@ -120,11 +121,16 @@ func take_stomp() -> void:
 		boss_defeated.emit()
 		_die()
 	else:
-		# Flash red briefly
+		# White flash then red flash
 		var orig = sprite.color
-		sprite.color = Color.RED
 		var tween = create_tween()
-		tween.tween_property(sprite, "color", orig, 0.3)
+		tween.tween_property(sprite, "color", Color(3, 3, 3), 0.05)  # White flash
+		tween.tween_property(sprite, "color", Color.RED, 0.1)
+		tween.tween_property(sprite, "color", orig, 0.25)
+		# Hit squash effect
+		var scale_tween = create_tween()
+		scale_tween.tween_property(self, "scale", Vector2(1.2, 0.8), 0.05)
+		scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.15)
 		# Brief invincibility / knockback phase
 		_phase = Phase.PATROL
 		_phase_timer = 2.0
@@ -139,20 +145,37 @@ func _update_health_bar() -> void:
 		health_bar_fill.size.x = (float(hp) / MAX_HEALTH) * 160.0
 
 func _screen_shake() -> void:
-	var cam = _player_ref.get_node_or_null("Camera2D") if _player_ref else null
+	# Try to get camera from player, fallback to finding any Camera2D in scene
+	var cam: Camera2D = null
+	if _player_ref:
+		cam = _player_ref.get_node_or_null("Camera2D")
+	if not cam:
+		# Search for any Camera2D in the scene tree
+		cam = _find_camera_recursive(get_tree().root)
 	if not cam:
 		return
+	# Apply shake effect
 	var tween = create_tween()
 	for i in 6:
 		var offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))
 		tween.tween_property(cam, "offset", offset, 0.04)
 	tween.tween_property(cam, "offset", Vector2.ZERO, 0.04)
 
+func _find_camera_recursive(node: Node) -> Camera2D:
+	if node is Camera2D:
+		return node
+	for child in node.get_children():
+		var result = _find_camera_recursive(child)
+		if result:
+			return result
+	return null
+
 func _play_sfx(stream: AudioStream) -> void:
 	if not stream:
 		return
 	var p = AudioStreamPlayer.new()
 	p.stream = stream
+	p.pitch_scale = randf_range(0.95, 1.05)
 	get_tree().root.add_child(p)
 	p.play()
 	p.finished.connect(p.queue_free)
@@ -169,4 +192,4 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		if body.take_hit():
 			GameManager.decrease_health()
 			var x_delta = body.global_position.x - global_position.x
-			body.jump_side(500.0 if x_delta > 0 else -500.0)
+			body.jump_side(KNOCKBACK_STRENGTH if x_delta > 0 else -KNOCKBACK_STRENGTH)

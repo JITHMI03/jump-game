@@ -19,6 +19,7 @@ config/icon="uid://dgh2sl8pogh26"
 
 GameManager="*res://game_manager.gd"
 Transition="*res://scene/transition.gd"
+Tutorial="*res://autoload/tutorial.gd"
 
 [display]
 

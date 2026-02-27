@@ -1,118 +1,145 @@
 [gd_scene format=3 uid="uid://bnlvpkbhvfj2b"]
 
 [ext_resource type="Script" uid="uid://d2qy1q1c5l5ul" path="res://scene/main_menu.gd" id="1_2fwvj"]
-[ext_resource type="Texture2D" uid="uid://bc4avf3nxhrg1" path="res://Yellow.png" id="1_hxu56"]
-[ext_resource type="PackedScene" path="res://scene/settings.tscn" id="3_settings"]
-[ext_resource type="Texture2D" uid="uid://yoipvm055731" path="res://cooltext503044370454559.png" id="2_2fwvj"]
+[ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="2_terrain"]
+[ext_resource type="Texture2D" uid="uid://yoipvm055731" path="res://cooltext503044370454559.png" id="3_2fwvj"]
+[ext_resource type="PackedScene" path="res://scene/settings.tscn" id="4_settings"]
 
-[node name="MainMenu" type="Node" unique_id=986921126]
+[node name="MainMenu" type="Node" unique_id=125239215]
 script = ExtResource("1_2fwvj")
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=617413705]
-texture_filter = 1
+[node name="SkyBG" type="ColorRect" parent="." unique_id=378220387]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_hxu56")
+color = Color(0.360784, 0.580392, 0.988235, 1)
+
+[node name="TerrainBG" type="TextureRect" parent="." unique_id=728342290]
+texture_filter = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -640.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_terrain")
 stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1557555893]
+[node name="Logo" type="TextureRect" parent="." unique_id=1179426357]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -295.0
-offset_top = -124.0
-offset_right = 294.76843
-offset_bottom = 14.0
+offset_top = -240.0
+offset_right = 295.0
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_2fwvj")
+texture = ExtResource("3_2fwvj")
+stretch_mode = 5
 
-[node name="level1" type="Button" parent="." unique_id=81964742]
+[node name="level1" type="Button" parent="." unique_id=1266967993]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = 23.0
-offset_right = -160.0
-offset_bottom = 100.0
+offset_left = -280.0
+offset_top = -40.0
+offset_right = -10.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Level 1"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 1"
 
-[node name="level2" type="Button" parent="." unique_id=504519456]
+[node name="level2" type="Button" parent="." unique_id=889315850]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -134.5
-offset_top = 23.0
-offset_right = 134.5
-offset_bottom = 100.0
+offset_left = 10.0
+offset_top = -40.0
+offset_right = 280.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Level 2"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 2"
 
-[node name="level3" type="Button" parent="." unique_id=504519457]
+[node name="level3" type="Button" parent="." unique_id=405722052]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = 115.0
-offset_right = 296.0
-offset_bottom = 192.0
+offset_left = -280.0
+offset_top = 60.0
+offset_right = 280.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Level 3 (New!)"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 3 (NEW!)"
 
-[node name="bestscore_label" type="Label" parent="."]
+[node name="bestscore_label" type="Label" parent="." unique_id=1064351487]
 unique_name_in_owner = true
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 200.0
-offset_right = 200.0
-offset_bottom = 240.0
+offset_left = -150.0
+offset_top = 160.0
+offset_right = 150.0
+offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-theme_override_colors/font_color = Color(1, 0.85, 0, 1)
-text = "Best Score: 0"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "TOP SCORE - 000"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-
-[node name="settings_btn" type="Button" parent="."]
+[node name="settings_btn" type="Button" parent="." unique_id=1994696783]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = 207.0
-offset_right = 296.0
-offset_bottom = 284.0
+offset_left = -280.0
+offset_top = 220.0
+offset_right = 280.0
+offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Settings"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "SETTINGS"
 
-[node name="settings" parent="." instance=ExtResource("3_settings")]
-
+[node name="settings" parent="." unique_id=772731686 instance=ExtResource("4_settings")]
 
 [connection signal="pressed" from="level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="level2" to="." method="_on_level_2_pressed"]

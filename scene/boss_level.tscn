@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" path="res://scene/game_over.tscn" id="9_bl_go"]
 [ext_resource type="PackedScene" path="res://scene/level_complete.tscn" id="10_bl_lc"]
 [ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="11_bl_terrain"]
+[ext_resource type="Script" path="res://scene/music.gd" id="12_bl_music"]
+[ext_resource type="AudioStream" path="res://bgm_boss.wav" id="13_bl_bgm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl"]
 texture = ExtResource("11_bl_terrain")
@@ -268,6 +270,10 @@ expand_mode = 2
 [node name="game_over" parent="ui" unique_id=435283624 instance=ExtResource("9_bl_go")]
 
 [node name="level_complete" parent="ui" unique_id=1994077559 instance=ExtResource("10_bl_lc")]
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+script = ExtResource("12_bl_music")
+bgm = ExtResource("13_bl_bgm")
 
 [connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]
