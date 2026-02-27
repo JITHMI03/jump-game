@@ -1,5 +1,16 @@
 extends Node
 
+var sfx_boss_defeat: AudioStream = preload("res://sfx_boss_defeat.wav")
+
+func _play_sfx(stream: AudioStream) -> void:
+	if not stream:
+		return
+	var p = AudioStreamPlayer.new()
+	p.stream = stream
+	get_tree().root.add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
 func _ready() -> void:
 	var boss = get_node_or_null("scene object/boss")
 	if boss:
@@ -15,6 +26,7 @@ func _on_boss_health_changed(hp: int) -> void:
 		bar.anchor_right = pct
 
 func _on_boss_defeated() -> void:
+	_play_sfx(sfx_boss_defeat)
 	await get_tree().create_timer(1.0).timeout
 	var lc = get_node_or_null("ui/level_complete")
 	if lc:

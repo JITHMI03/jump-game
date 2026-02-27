@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwk7jyc4u1ooi" path="res://scene/enemy.gd" id="1_f87vc"]
 [ext_resource type="Texture2D" uid="uid://b7ehv7xwecq0u" path="res://mushroom-idle.png" id="1_h08p8"]
+[ext_resource type="AudioStream" path="res://sfx_enemy_stomp.wav" id="2_sfx_stomp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h08p8"]
 atlas = ExtResource("1_h08p8")
@@ -47,6 +48,7 @@ size = Vector2(59, 51)
 
 [node name="enemy" type="RigidBody2D" unique_id=292399724]
 script = ExtResource("1_f87vc")
+sfx_stomp = ExtResource("2_sfx_stomp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=513421469]
 texture_filter = 1

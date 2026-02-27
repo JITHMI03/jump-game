@@ -4,6 +4,18 @@ extends Node
 @onready var pointslabel: Label = %pointslabel
 @onready var multiplierlabel: Label = %multiplierlabel
 
+var sfx_game_over: AudioStream = preload("res://sfx_game_over.wav")
+var sfx_player_death: AudioStream = preload("res://sfx_player_death.wav")
+
+func _play_sfx(stream: AudioStream) -> void:
+	if not stream:
+		return
+	var p = AudioStreamPlayer.new()
+	p.stream = stream
+	get_tree().root.add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
 func _ready() -> void:
 	GameManager.reset()
 	_refresh_hearts(GameManager.lives)
@@ -16,6 +28,8 @@ func _ready() -> void:
 
 func _on_health_changed(lives: int) -> void:
 	_refresh_hearts(lives)
+	if lives <= 0:
+		_play_sfx(sfx_player_death)
 
 func _on_points_changed(pts: int) -> void:
 	pointslabel.text = "Collected: " + str(pts)
@@ -28,6 +42,7 @@ func _on_multiplier_changed(mult: int) -> void:
 		multiplierlabel.visible = false
 
 func _on_game_over(pts: int) -> void:
+	_play_sfx(sfx_game_over)
 	var root = get_tree().current_scene
 	var panel = root.get_node_or_null("ui/game_over/GameOverPanel")
 	if panel:

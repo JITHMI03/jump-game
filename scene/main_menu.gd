@@ -1,5 +1,16 @@
 extends Node
 
+var sfx_button: AudioStream = preload("res://sfx_button.wav")
+
+func _play_sfx() -> void:
+	if not sfx_button:
+		return
+	var p = AudioStreamPlayer.new()
+	p.stream = sfx_button
+	get_tree().root.add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
+
 func _ready() -> void:
 	var lbl = get_node_or_null("bestscore_label")
 	if lbl:
@@ -10,15 +21,19 @@ func _ready() -> void:
 			lbl.text = "Best Score: --"
 
 func _on_level_1_pressed() -> void:
+	_play_sfx()
 	Transition.fade_to_scene("res://scene/level1.tscn")
 
 func _on_level_2_pressed() -> void:
+	_play_sfx()
 	Transition.fade_to_scene("res://scene/level2.tscn")
 
 func _on_level_3_pressed() -> void:
+	_play_sfx()
 	Transition.fade_to_scene("res://scene/level3.tscn")
 
 func _on_settings_pressed() -> void:
+	_play_sfx()
 	var s = get_node_or_null("settings")
 	if s:
 		s.show_settings()

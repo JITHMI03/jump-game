@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://boss_scene"]
 
 [ext_resource type="Script" path="res://scene/boss.gd" id="1_boss_script"]
+[ext_resource type="AudioStream" path="res://sfx_enemy_stomp.wav" id="2_sfx_stomp"]
+[ext_resource type="AudioStream" path="res://sfx_boss_hit.wav" id="3_sfx_hurt"]
+[ext_resource type="AudioStream" path="res://sfx_dash.wav" id="4_sfx_charge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(80, 100)
@@ -12,6 +15,9 @@ size = Vector2(100, 120)
 collision_layer = 4
 collision_mask = 1
 script = ExtResource("1_boss_script")
+sfx_stomp = ExtResource("2_sfx_stomp")
+sfx_charge = ExtResource("4_sfx_charge")
+sfx_hurt = ExtResource("3_sfx_hurt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_body")
