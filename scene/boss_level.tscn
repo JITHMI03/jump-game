@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://boss_level_scene"]
+[gd_scene format=4 uid="uid://dasfsquy2xlt4"]
 
-[ext_resource type="Script" path="res://scene/boss_level.gd" id="1_bl_script"]
-[ext_resource type="Script" path="res://scene/level_ui.gd" id="2_bl_ui"]
+[ext_resource type="Script" uid="uid://cm755cg1xmkd0" path="res://scene/boss_level.gd" id="1_bl_script"]
+[ext_resource type="Script" uid="uid://btparamhya5aa" path="res://scene/level_ui.gd" id="2_bl_ui"]
 [ext_resource type="PackedScene" uid="uid://buawt8jeqjdwi" path="res://scene/main_character.tscn" id="3_bl_char"]
 [ext_resource type="PackedScene" path="res://scene/boss.tscn" id="4_bl_boss"]
 [ext_resource type="Script" uid="uid://wqw210fonsnd" path="res://scene/fall_area.gd" id="5_bl_fall"]
 [ext_resource type="Texture2D" uid="uid://bel8qet76jvv3" path="res://love-always-wins.png" id="6_bl_hearts"]
 [ext_resource type="Script" uid="uid://d3tucm2ix8850" path="res://scene/pause.gd" id="7_bl_pause"]
 [ext_resource type="PackedScene" path="res://scene/touch_controls.tscn" id="8_bl_touch"]
-[ext_resource type="PackedScene" uid="uid://game_over_scene" path="res://scene/game_over.tscn" id="9_bl_go"]
-[ext_resource type="PackedScene" uid="uid://level_complete_scene" path="res://scene/level_complete.tscn" id="10_bl_lc"]
+[ext_resource type="PackedScene" path="res://scene/game_over.tscn" id="9_bl_go"]
+[ext_resource type="PackedScene" path="res://scene/level_complete.tscn" id="10_bl_lc"]
 [ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="11_bl_terrain"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl"]
@@ -39,33 +39,32 @@ sources/1 = SubResource("TileSetAtlasSource_bl")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bl"]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" unique_id=1186502155]
 script = ExtResource("1_bl_script")
 
-[node name="gamemanager" type="Node" parent="." node_paths=PackedStringArray("hearts")]
+[node name="gamemanager" type="Node" parent="." unique_id=744393492 node_paths=PackedStringArray("hearts")]
 script = ExtResource("2_bl_ui")
 hearts = [NodePath("../ui/hearts/HBoxContainer/heart"), NodePath("../ui/hearts/HBoxContainer/heart2"), NodePath("../ui/hearts/HBoxContainer/heart3")]
 
-[node name="scene object" type="Node" parent="."]
+[node name="scene object" type="Node" parent="." unique_id=2107919824]
 
-[node name="TileMap" type="TileMap" parent="scene object"]
+[node name="TileMap" type="TileMap" parent="scene object" unique_id=1738729029]
 texture_filter = 1
 position = Vector2(0, 48)
 scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_bl")
 format = 2
-layer_0/tile_data = PackedInt32Array()
 
-[node name="Layer1" type="TileMapLayer" parent="scene object/TileMap"]
+[node name="Layer1" type="TileMapLayer" parent="scene object/TileMap" unique_id=1751175510]
 texture_filter = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAAAAgAAQAHAAkAAAAAAAYAAQAHAAkAAAAAAA0AAQAHAAgAAAABAA0AAQAHAAgAAAACAA0AAQAHAAgAAAADAA0AAQAHAAgAAAAEAA0AAQAHAAgAAAAFAA0AAQAHAAgAAAAGAA0AAQAHAAgAAAAHAA0AAQAHAAgAAAAIAA0AAQAHAAgAAAAJAA0AAQAHAAgAAAAKAA0AAQAHAAgAAAALAA0AAQAHAAgAAAAMAA0AAQAHAAgAAAANAA0AAQAHAAgAAAAOAA0AAQAHAAgAAAAPAA0AAQAHAAgAAAAQAA0AAQAHAAgAAAARAA0AAQAHAAgAAAAAAAQAAQAHAAgAAAABAAQAAQAHAAgAAAACAAQAAQAHAAgAAAAAAAUAAQAHAAkAAAABAAUAAQAHAAkAAAACAAUAAQAHAAkAAAAIAAMAAQAGAAgAAAAJAAMAAQAIAAgAAAAIAAQAAQAGAAoAAAAJAAQAAQAIAAoAAAAIAAUAAQAGAAoAAAAJAAUAAQAIAAoAAAD///7/AQAHAAoAAAABAP7/AQAHAAoAAAACAP7/AQAHAAoAAAADAP7/AQAHAAoAAAAEAP7/AQAHAAoAAAAFAP7/AQAHAAoAAAAGAP7/AQAHAAoAAAAHAP7/AQAHAAoAAAAIAP7/AQAHAAoAAAAJAP7/AQAHAAoAAAAKAP7/AQAHAAoAAAALAP7/AQAHAAoAAAAMAP7/AQAHAAoAAAANAP7/AQAHAAoAAAAOAP7/AQAHAAoAAAAPAP7/AQAHAAoAAAAQAP7/AQAHAAoAAAARAP7/AQAHAAoAAAA=")
+tile_map_data = PackedByteArray("AAAAAAgAAQAHAAEAAAAAAAYAAQAHAAkAAAAAAA0AAQAHAAEAAAABAA0AAQAHAAEAAAACAA0AAQAHAAEAAAADAA0AAQAHAAEAAAAEAA0AAQAHAAEAAAAFAA0AAQAHAAEAAAAGAA0AAQAHAAEAAAAHAA0AAQAHAAEAAAAIAA0AAQAHAAEAAAAJAA0AAQAHAAEAAAAKAA0AAQAHAAEAAAALAA0AAQAHAAEAAAAMAA0AAQAHAAEAAAANAA0AAQAHAAEAAAAOAA0AAQAHAAEAAAAPAA0AAQAHAAEAAAAQAA0AAQAHAAEAAAARAA0AAQAHAAEAAAAAAAQAAQAHAAgAAAABAAQAAQAHAAgAAAACAAQAAQAHAAgAAAAAAAUAAQAHAAEAAAABAAUAAQAHAAEAAAACAAUAAQAHAAEAAAAIAAMAAQAGAAgAAAAJAAMAAQAIAAgAAAAIAAQAAQAGAAoAAAAJAAQAAQAIAAoAAAAIAAUAAQAGAAoAAAAJAAUAAQAIAAoAAAD///7/AQAHAAoAAAABAP7/AQAHAAoAAAACAP7/AQAHAAoAAAADAP7/AQAHAAoAAAAEAP7/AQAHAAoAAAAFAP7/AQAHAAoAAAAGAP7/AQAHAAoAAAAHAP7/AQAHAAoAAAAIAP7/AQAHAAoAAAAJAP7/AQAHAAoAAAAKAP7/AQAHAAoAAAALAP7/AQAHAAoAAAAMAP7/AQAHAAoAAAANAP7/AQAHAAoAAAAOAP7/AQAHAAoAAAAPAP7/AQAHAAoAAAAQAP7/AQAHAAoAAAARAP7/AQAHAAoAAAAKAAwAAQAHAAEAAAAKAAsAAQAHAAEAAAAKAAoAAQAHAAEAAAAKAAkAAQAHAAEAAAALAAkAAQAHAAEAAAAMAAkAAQAHAAEAAAAMAAgAAQAHAAEAAAANAAgAAQAHAAEAAAAOAAgAAQAHAAEAAAAPAAgAAQAHAAEAAAAQAAgAAQAHAAEAAAARAAgAAQAHAAEAAAASAAgAAQAHAAEAAAATAAgAAQAHAAEAAAAUAAgAAQAHAAEAAAAVAAgAAQAHAAEAAAAWAAgAAQAHAAEAAAA=")
 tile_set = SubResource("TileSet_bl")
 
-[node name="CharacterBody2D" parent="scene object" instance=ExtResource("3_bl_char")]
+[node name="CharacterBody2D" parent="scene object" unique_id=382075332 instance=ExtResource("3_bl_char")]
 position = Vector2(100, 41)
 
-[node name="Camera2D" type="Camera2D" parent="scene object/CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="scene object/CharacterBody2D" unique_id=1293945974]
 position = Vector2(36, 162)
 limit_left = 0
 limit_top = -300
@@ -74,25 +73,25 @@ limit_bottom = 700
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
-[node name="boss" parent="scene object" instance=ExtResource("4_bl_boss")]
+[node name="boss" parent="scene object" unique_id=792911190 instance=ExtResource("4_bl_boss")]
 position = Vector2(750, 380)
 
-[node name="fall_area" type="Area2D" parent="scene object"]
+[node name="fall_area" type="Area2D" parent="scene object" unique_id=1569325615]
 position = Vector2(700, 700)
 script = ExtResource("5_bl_fall")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="scene object/fall_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene object/fall_area" unique_id=2042467523]
 shape = SubResource("WorldBoundaryShape2D_bl")
 
-[node name="ui" type="CanvasLayer" parent="."]
+[node name="ui" type="CanvasLayer" parent="." unique_id=699109096]
 
-[node name="Panel" type="Panel" parent="ui"]
+[node name="Panel" type="Panel" parent="ui" unique_id=928764345]
 offset_left = 39.0
 offset_top = 18.0
 offset_right = 250.0
 offset_bottom = 71.0
 
-[node name="pointslabel" type="Label" parent="ui/Panel"]
+[node name="pointslabel" type="Label" parent="ui/Panel" unique_id=700012233]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -104,10 +103,9 @@ theme_override_font_sizes/font_size = 30
 text = "Collected : 0"
 horizontal_alignment = 1
 
-[node name="multiplierlabel" type="Label" parent="ui"]
+[node name="multiplierlabel" type="Label" parent="ui" unique_id=2049826990]
 unique_name_in_owner = true
 visible = false
-layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -119,67 +117,63 @@ offset_right = 200.0
 offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 40
 theme_override_colors/font_color = Color(1, 0.85, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_colors/font_outline_color = Color(0.8, 0.2, 0, 0.8)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 4
-theme_override_colors/font_outline_color = Color(0.8, 0.2, 0, 0.8)
+theme_override_font_sizes/font_size = 40
 text = "x2 COMBO!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="boss_health_ui" type="Panel" parent="ui"]
-anchors_preset = 8
+[node name="boss_health_ui" type="Panel" parent="ui" unique_id=630398239]
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
 offset_left = -200.0
 offset_top = 15.0
 offset_right = 200.0
 offset_bottom = 55.0
 grow_horizontal = 2
 
-[node name="label" type="Label" parent="ui/boss_health_ui"]
+[node name="label" type="Label" parent="ui/boss_health_ui" unique_id=1800016752]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.4
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 16
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 16
 text = "BOSS"
 horizontal_alignment = 1
 
-[node name="bar_bg" type="ColorRect" parent="ui/boss_health_ui"]
+[node name="bar_bg" type="ColorRect" parent="ui/boss_health_ui" unique_id=1798425181]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -14.0
+grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.2, 0.2, 0.2, 0.8)
 
-[node name="bar_fill" type="ColorRect" parent="ui/boss_health_ui/bar_bg"]
+[node name="bar_fill" type="ColorRect" parent="ui/boss_health_ui/bar_bg" unique_id=1600826092]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.0
-anchor_top = 0.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 1
 grow_vertical = 2
 color = Color(0.9, 0.2, 0.2, 1)
 
-[node name="pause" type="Node" parent="ui"]
+[node name="pause" type="Node" parent="ui" unique_id=1211454443]
 process_mode = 3
 script = ExtResource("7_bl_pause")
 
-[node name="PausePanel" type="Panel" parent="ui/pause"]
+[node name="PausePanel" type="Panel" parent="ui/pause" unique_id=913560386]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,7 +181,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="ui/pause/PausePanel"]
+[node name="Label" type="Label" parent="ui/pause/PausePanel" unique_id=2035707813]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -204,7 +198,7 @@ theme_override_font_sizes/font_size = 50
 text = "Game Paused"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/pause/PausePanel/Label"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/pause/PausePanel/Label" unique_id=1987019012]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -218,19 +212,19 @@ offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="resume" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+[node name="resume" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer" unique_id=1811406987]
 process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Resume"
 
-[node name="menu" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer"]
+[node name="menu" type="Button" parent="ui/pause/PausePanel/Label/VBoxContainer" unique_id=1263091139]
 process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 
-[node name="hearts" type="Panel" parent="ui"]
+[node name="hearts" type="Panel" parent="ui" unique_id=1720681258]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -239,7 +233,7 @@ offset_top = 15.0
 offset_bottom = 62.0
 grow_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/hearts"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/hearts" unique_id=138374196]
 layout_direction = 4
 layout_mode = 1
 anchors_preset = -1
@@ -251,29 +245,29 @@ offset_bottom = 22.5
 grow_vertical = 2
 alignment = 1
 
-[node name="heart" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+[node name="heart" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=404467920]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("6_bl_hearts")
 expand_mode = 2
 
-[node name="heart2" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+[node name="heart2" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=2031149156]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("6_bl_hearts")
 expand_mode = 2
 
-[node name="heart3" type="TextureRect" parent="ui/hearts/HBoxContainer"]
+[node name="heart3" type="TextureRect" parent="ui/hearts/HBoxContainer" unique_id=1597877665]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("6_bl_hearts")
 expand_mode = 2
 
-[node name="touch_controls" parent="ui" instance=ExtResource("8_bl_touch")]
+[node name="touch_controls" parent="ui" unique_id=271205571 instance=ExtResource("8_bl_touch")]
 
-[node name="game_over" parent="ui" instance=ExtResource("9_bl_go")]
+[node name="game_over" parent="ui" unique_id=435283624 instance=ExtResource("9_bl_go")]
 
-[node name="level_complete" parent="ui" instance=ExtResource("10_bl_lc")]
+[node name="level_complete" parent="ui" unique_id=1994077559 instance=ExtResource("10_bl_lc")]
 
 [connection signal="body_entered" from="scene object/fall_area" to="scene object/fall_area" method="_on_body_entered"]
 [connection signal="pressed" from="ui/pause/PausePanel/Label/VBoxContainer/resume" to="ui/pause" method="_on_resume_pressed"]

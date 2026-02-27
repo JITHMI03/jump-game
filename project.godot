@@ -15,6 +15,11 @@ run/main_scene="uid://bnlvpkbhvfj2b"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dgh2sl8pogh26"
 
+[autoload]
+
+GameManager="*res://game_manager.gd"
+Transition="*res://scene/transition.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -49,11 +54,6 @@ dash={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-
-[autoload]
-
-GameManager="*res://game_manager.gd"
-Transition="*res://scene/transition.gd"
 
 [input_devices]
 
