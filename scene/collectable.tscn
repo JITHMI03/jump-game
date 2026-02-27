@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvgywv4rx3gau" path="res://scene/collectable.gd" id="1_28dhl"]
 [ext_resource type="Texture2D" uid="uid://t5soh67q47h8" path="res://IMG_6550-removebg-preview.png" id="2_28dhl"]
+[ext_resource type="AudioStream" path="res://coin_collect.wav" id="3_sfx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqe0m"]
 atlas = ExtResource("2_28dhl")
@@ -51,6 +52,7 @@ radius = 24.738634
 
 [node name="collectable" type="Area2D" unique_id=428107123]
 script = ExtResource("1_28dhl")
+sfx_collect = ExtResource("3_sfx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=290994273]
 texture_filter = 1
