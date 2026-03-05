@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bnlvpkbhvfj2b"]
 
 [ext_resource type="Script" uid="uid://d2qy1q1c5l5ul" path="res://scene/main_menu.gd" id="1_2fwvj"]
-[ext_resource type="Texture2D" uid="uid://03c6o7xixrra" path="res://Terrain (16x16).png" id="2_terrain"]
+[ext_resource type="Texture2D" uid="uid://cexp8ay4nafdf" path="res://ChatGPT Image Mar 4, 2026, 07_32_54 PM.png" id="2_0iwki"]
 [ext_resource type="Texture2D" uid="uid://yoipvm055731" path="res://cooltext503044370454559.png" id="3_2fwvj"]
 [ext_resource type="PackedScene" path="res://scene/settings.tscn" id="4_settings"]
 
@@ -22,10 +22,14 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -640.0
+offset_left = -22.0
+offset_top = -682.0
+offset_right = 28.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_terrain")
+texture = ExtResource("2_0iwki")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="Logo" type="TextureRect" parent="." unique_id=1179426357]
@@ -57,7 +61,6 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 32
 text = "LEVEL 1"
 
@@ -74,8 +77,6 @@ offset_right = 280.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 32
 text = "LEVEL 2"
 
@@ -92,8 +93,6 @@ offset_right = 280.0
 offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 32
 text = "LEVEL 3 (NEW!)"
 
@@ -114,9 +113,8 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 28
+theme_override_constants/outline_size = -9
+theme_override_font_sizes/font_size = 32
 text = "TOP SCORE - 000"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -135,7 +133,6 @@ offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 28
 text = "SETTINGS"
 
