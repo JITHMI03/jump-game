@@ -22,11 +22,6 @@ const WALL_JUMP_VELOCITY_X = 400.0
 const WALL_JUMP_VELOCITY_Y = -800.0
 const WALL_JUMP_LOCK_TIME = 0.18
 
-# Camera zoom
-const CAMERA_ZOOM_DEFAULT = 1.0
-const CAMERA_ZOOM_OUT = 0.9  # Zoom out when airborne at high speed
-const CAMERA_ZOOM_SPEED = 3.0
-
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var camera: Camera2D = $Camera2D
 @onready var _sfx: AudioStreamPlayer = $SFX
@@ -191,7 +186,6 @@ func _physics_process(delta: float) -> void:
 		jump_count = 1
 		jump_buffer_timer = 0.0
 		coyote_timer = 0.0
-		_play_sfx(sfx_jump)
 	else:
 		# --- Normal jump (buffer + coyote combined) ---
 		var can_jump = (on_floor or coyote_timer > 0.0) and jump_count < 1
@@ -199,10 +193,6 @@ func _physics_process(delta: float) -> void:
 		if jump_buffer_timer > 0.0 and (can_jump or double_jump):
 			velocity.y = JUMP_VELOCITY
 			_jump_held = true
-			if jump_count == 0:
-				_play_sfx(sfx_jump)
-			else:
-				_play_sfx(sfx_double_jump)
 			jump_count += 1
 			jump_buffer_timer = 0.0
 			coyote_timer = 0.0
@@ -283,29 +273,7 @@ func _physics_process(delta: float) -> void:
 		if velocity.x != 0:
 			sprite_2d.flip_h = velocity.x < 0
 
-	# --- Dynamic camera zoom ---
-	_update_camera_zoom(delta, on_floor)
-
 	was_on_floor = on_floor
-
-func _update_camera_zoom(delta: float, on_floor: bool) -> void:
-	if not camera:
-		return
-	# Calculate target zoom based on state
-	var target_zoom = CAMERA_ZOOM_DEFAULT
-	var speed_factor = abs(velocity.x) / SPEED
-	var air_factor = 0.0 if on_floor else min(abs(velocity.y) / 600.0, 1.0)
-
-	# Zoom out more when moving fast in air or during dash
-	if is_dashing:
-		target_zoom = CAMERA_ZOOM_OUT * 0.95
-	elif not on_floor and (speed_factor > 0.8 or air_factor > 0.5):
-		target_zoom = lerp(CAMERA_ZOOM_DEFAULT, CAMERA_ZOOM_OUT, max(speed_factor, air_factor))
-
-	# Smooth zoom transition
-	var current = camera.zoom.x
-	var new_zoom = move_toward(current, target_zoom, CAMERA_ZOOM_SPEED * delta)
-	camera.zoom = Vector2(new_zoom, new_zoom)
 
 func _start_dash_trail() -> void:
 	if _dash_trail:
